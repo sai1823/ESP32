@@ -1,15 +1,19 @@
 # ESP32
 Esp32- Cam Module
 
-This code is intended for the ESP-32 cam module project, version 1.1, which captures images using an ESP32-based camera and saves them to an SD card. The captured images can also be uploaded to a server using HTTP POST requests. The code provides the necessary functionalities for configuring the camera, capturing images, and managing the SD card.
+Description
+The code provided is an example implementation for capturing images using an AI Thinker camera module and saving them to an SD card. The code utilizes the ESP32 board and various libraries to control the camera module, establish an internet connection, and perform image capturing and storage. The captured images can also be uploaded to a server using HTTP POST requests. The code provides the necessary functionalities for configuring the camera, capturing images, and managing the SD card.
 
-## Hardware Requirements
-- ESP32-based development board
-- Camera module compatible with ESP32
-- SD card module compatible with ESP32
+## Prerequisites
+Before running the code, ensure that you have the following:
+
+-ESP32 board
+-AI Thinker camera module
+-SD card module
+-Arduino IDE with ESP32 board support
+-Required libraries: NTPClient, WiFiUdp, WiFi, ESPmDNS, esp_camera, ESP_LOG, esp_http_server, esp_http_client, Arduino, driver/sdmmc_host, driver/sdmmc_defs, sdmmc_cmd, esp_vfs_fat, SD_MMC
 
 ## Libraries
-The code relies on several libraries that need to be installed in your development environment:
 - NTPClient: Provides NTP (Network Time Protocol) client functionality for time synchronization.
 - WiFiUdp: Enables UDP communication over Wi-Fi.
 - WiFi: Enables Wi-Fi connectivity for the ESP32 board.
@@ -20,12 +24,51 @@ The code relies on several libraries that need to be installed in your developme
 - ESP HTTP Client: Implements an HTTP client for making HTTP requests.
 
 ## Configuration
-Before running the code, make sure to configure the following variables:
+To configure the code for your specific setup, make the following changes:
+
+Set the appropriate values for Wi-Fi network credentials:
 
 - `ssid`: Set the SSID (name) of your Wi-Fi network.
 - `password`: Set the password for your Wi-Fi network.
+cpp
+Copy code
+const char* ssid = "Your_WiFi_SSID";
+const char* password = "Your_WiFi_Password";
+Adjust the capture interval (in milliseconds) according to your requirements:
+
 - `capture_interval`: Set the interval (in milliseconds) between image captures.
+cpp
+Copy code
+int capture_interval = 600000; // 10 minutes
+Specify the URL for uploading the captured images:
+
 - `post_url`: Set the URL for uploading images to a server.
+cpp
+Copy code
+const char *post_url = "http://example.com/upload.php";
+Modify the pins assigned to the AI Thinker camera module according to your pin configuration:
+
+
+cpp
+Copy code
+// Define pins of AI Thinker
+#define PWDN_GPIO_NUM     32
+#define RESET_GPIO_NUM    -1
+#define XCLK_GPIO_NUM       0
+#define SIOD_GPIO_NUM     26
+#define SIOC_GPIO_NUM     27
+#define Y9_GPIO_NUM       35
+#define Y8_GPIO_NUM       34
+#define Y7_GPIO_NUM       39
+#define Y6_GPIO_NUM       36
+#define Y5_GPIO_NUM       21
+#define Y4_GPIO_NUM       19
+#define Y3_GPIO_NUM       18
+#define Y2_GPIO_NUM        5
+#define VSYNC_GPIO_NUM    25
+#define HREF_GPIO_NUM     23
+#define PCLK_GPIO_NUM     22
+Before running the code, make sure to configure the following variables:
 
 ## Pin Definitions
 The code utilizes specific GPIO pin assignments for the camera module. Ensure that the following pins are correctly connected between the ESP32 board and the camera module:
@@ -66,21 +109,27 @@ The code uses the SDMMC library to interface with the SD card module. Ensure tha
 6. If internet connectivity is available, the ESP32 will attempt to upload the captured images to the specified server using HTTP POST requests.
 
 ## Troubleshooting
--
-
- If the code fails to compile or upload, verify that all the required libraries are correctly installed in your development environment.
+- If the code fails to compile or upload, verify that all the required libraries are correctly installed in your development environment.
 - Double-check the hardware connections and ensure that the camera module and SD card module are correctly connected to the ESP32 board.
 - If the Wi-Fi connection fails, ensure that the SSID and password are correct and that the Wi-Fi network is accessible.
 - If image capture or SD card functionality does not work, review the pin assignments and ensure that the camera module and SD card module are properly connected.
 
 ## License
-This code is released under the [MIT License](LICENSE).
-
-## Acknowledgments
-The code is based on the DiPoo project by [Author's Name]. Special thanks to the contributors and the open-source community for their valuable resources and support.
+This code is provided under the MIT License. Feel free to modify, distribute, and use it according to your needs.
 
 ## References
-- ESP32 Camera Library: [Link to the library documentation]
-- NTPClient Library: [Link to the library documentation]
-- ESP HTTP Server Library: [Link to the library documentation]
-- ESP HTTP Client Library: [Link to the library documentation]
+1. ESP32 Camera Library:
+   - GitHub Repository: [https://github.com/espressif/esp32-camera](https://github.com/espressif/esp32-camera)
+   - ESP32 Camera Documentation: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/camera.html](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/camera.html)
+
+2. NTPClient Library:
+   - Arduino Library Manager: [https://www.arduino.cc/reference/en/libraries/ntpclient/](https://www.arduino.cc/reference/en/libraries/ntpclient/)
+   - GitHub Repository: [https://github.com/arduino-libraries/NTPClient](https://github.com/arduino-libraries/NTPClient)
+
+3. ESP HTTP Server Library:
+   - GitHub Repository: [https://github.com/espressif/esp-http-server](https://github.com/espressif/esp-http-server)
+   - ESP HTTP Server Documentation: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_server.html](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_server.html)
+
+4. ESP HTTP Client Library:
+   - GitHub Repository: [https://github.com/espressif/esp-http-client](https://github.com/espressif/esp-http-client)
+   - ESP HTTP Client Documentation: [https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/protocols/esp_http_client.html)
