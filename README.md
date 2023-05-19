@@ -1,8 +1,7 @@
 # ESP32
 Esp32- Cam Module
-# Readme - DiPoo Code
 
-This code is intended for the DiPoo project, version 1.1, which captures images using an ESP32-based camera and saves them to an SD card. The captured images can also be uploaded to a server using HTTP POST requests. The code provides the necessary functionalities for configuring the camera, capturing images, and managing the SD card.
+This code is intended for the ESP-32 cam module project, version 1.1, which captures images using an ESP32-based camera and saves them to an SD card. The captured images can also be uploaded to a server using HTTP POST requests. The code provides the necessary functionalities for configuring the camera, capturing images, and managing the SD card.
 
 ## Hardware Requirements
 - ESP32-based development board
